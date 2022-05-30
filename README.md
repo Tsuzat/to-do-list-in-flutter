@@ -1,16 +1,16 @@
 # to_do_list
 
-A new Flutter project.
+A to do list app written in Dart using flutter framework
 
-## Getting Started
+### Screenshots
+<p>
+    <img src="screenshot1.jpg" height = "500">
+    <img src="screenshot2.jpg" height = "500">
+</p>
 
-This project is a starting point for a Flutter application.
+### To Do
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Show details of a task on tap with delete option (ShowDialog)
+- Grouping of Task
+- User Aouth
+- Database or firebase integration
