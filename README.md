@@ -8,6 +8,8 @@ A to do list app written in Dart using flutter framework
     <img src="screenshot2.jpg" height = "500">
 </p>
 
+<img src="demo.gif" height = "500">
+
 ### To Do
 
 - Show details of a task on tap with delete option (ShowDialog)
