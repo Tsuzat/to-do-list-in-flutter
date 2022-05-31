@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class TaskList extends StatefulWidget {
-  final List<Map<String,dynamic>> todoList;
+  final List<Map<String, dynamic>> todoList;
   const TaskList({
     Key? key,
     required this.todoList,
@@ -13,7 +13,6 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  
   void _deleteItem(int index) {
     widget.todoList.removeAt(index);
   }
@@ -46,8 +45,9 @@ class _TaskListState extends State<TaskList> {
             decorationStyle: TextDecorationStyle.solid,
             decorationThickness: 3,
             decorationColor: const Color.fromRGBO(151, 153, 167, 1),
-            decoration:
-                widget.todoList[index]['done'] ? TextDecoration.lineThrough : null,
+            decoration: widget.todoList[index]['done']
+                ? TextDecoration.lineThrough
+                : null,
           ),
           overflow: TextOverflow.ellipsis,
         ),
@@ -64,6 +64,60 @@ class _TaskListState extends State<TaskList> {
                 ),
               )
             : null,
+        onTap: () {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: const Center(child: Text("Task")),
+              titleTextStyle: const TextStyle(
+                  color: Color.fromRGBO(151, 153, 167, 1),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+              contentTextStyle: const TextStyle(
+                color: Color.fromRGBO(151, 153, 167, 1),
+                fontSize: 16,
+              ),
+              content: Text(widget.todoList[index]['name']),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.todoList[index]['done'] =
+                          !widget.todoList[index]['done'];
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  child: Text(
+                    widget.todoList[index]['done']
+                        ? "Mark as to do"
+                        : "Mark as done",
+                    style: const TextStyle(
+                      color: Color.fromRGBO(175, 126, 235, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    setState(() {
+                      widget.todoList.removeAt(index);
+                      Navigator.of(context).pop();
+                    });
+                  },
+                  child: const Text(
+                    "Delete",
+                    style: TextStyle(
+                      color: Color.fromRGBO(175, 126, 235, 1),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }

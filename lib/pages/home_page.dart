@@ -103,7 +103,12 @@ class _HomePageState extends State<HomePage> {
                             });
                           }
                         },
-                        child: const Text("Add"),
+                        child: const Text(
+                          "Add",
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ],
                   ),
