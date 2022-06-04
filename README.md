@@ -4,11 +4,11 @@ A to do list app written in Dart using flutter framework
 
 ### Screenshots
 <p>
-    <img src="screenshot1.jpg" height = "500">
-    <img src="screenshot2.jpg" height = "500">
+    <img src="markdown/screenshot1.jpg" height = "500">
+    <img src="markdown/screenshot2.jpg" height = "500">
 </p>
 
-<img src="demo.gif" height = "500">
+<img src="markdown/demo.gif" height = "500">
 
 ### To Do
 
