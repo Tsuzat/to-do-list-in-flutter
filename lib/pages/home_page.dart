@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_do_list/utils/to_do_tasks.dart';
+import 'package:to_do_list/api/firebase_api.dart';
+import 'package:to_do_list/models/todo.dart';
 import 'package:to_do_list/widgets/task_list.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,7 +11,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<Map<String, dynamic>> todoList = ToDoTaskList.tasks;
+  final List<ToDo> todoList = ToDoList.todolist;
   final _formkey = GlobalKey<FormState>();
   final myController = TextEditingController();
 
@@ -95,10 +96,9 @@ class _HomePageState extends State<HomePage> {
                           if (_formkey.currentState!.validate()) {
                             Navigator.of(context).pop();
                             setState(() {
-                              todoList.add({
-                                'name': myController.text,
-                                'done': false,
-                              });
+                              ToDo temp = ToDo.fromMap(
+                                  {'name': myController.text, 'done': false});
+                              todoList.add(temp);
                               myController.text = "";
                             });
                           }
