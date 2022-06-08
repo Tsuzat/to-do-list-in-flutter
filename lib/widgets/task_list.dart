@@ -30,8 +30,8 @@ class _TaskListState extends State<TaskList> {
             });
           },
           icon: widget.todoList[index].done
-              ? const Icon(Icons.circle)
-              : const Icon(Icons.circle_outlined),
+              ? const Icon(Icons.radio_button_checked)
+              : const Icon(Icons.radio_button_off_outlined),
           color: widget.todoList[index].done
               ? const Color.fromRGBO(175, 126, 235, 1)
               : const Color.fromRGBO(151, 153, 167, 1),
@@ -60,7 +60,7 @@ class _TaskListState extends State<TaskList> {
                   });
                 },
                 icon: const Icon(
-                  CupertinoIcons.delete_simple,
+                  CupertinoIcons.delete_solid,
                   size: 22,
                 ),
               )
