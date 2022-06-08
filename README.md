@@ -10,9 +10,8 @@ A to do list app written in Dart using flutter framework
 
 <img src="markdown/demo.gif" height = "500">
 
-### To Do
+### Future Updates
 
-- Show details of a task on tap with delete option (ShowDialog)
-- Grouping of Task
-- User Aouth
-- Database or firebase integration
+- Sidebar
+- Multiple todo lists
+- different theme
