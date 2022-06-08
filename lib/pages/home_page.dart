@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_list/models/todo.dart';
 import 'package:to_do_list/widgets/task_list.dart';
+
+import '../boxes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -10,7 +13,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<ToDo> todoList = ToDoList.todolist;
+  @override
+  void dispose() {
+    Hive.box('todolist').close();
+    super.dispose();
+  }
+
   final _formkey = GlobalKey<FormState>();
   final myController = TextEditingController();
 
@@ -28,8 +36,22 @@ class _HomePageState extends State<HomePage> {
         margin: const EdgeInsets.all(30),
         padding: const EdgeInsets.all(10),
         decoration: const BoxDecoration(color: Colors.white),
-        child: TaskList(
-          todoList: todoList,
+        child: ValueListenableBuilder<Box<ToDo>>(
+          valueListenable: Boxes.getTodolist().listenable(),
+          builder: (context, box, _) {
+            final todoList = box.values.toList().cast<ToDo>();
+            return todoList.isNotEmpty
+                ? TaskList(todoList: todoList)
+                : const Center(
+                    child: Text(
+                      "Nothing left to do. Add new tasks",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color.fromRGBO(151, 153, 167, 1),
+                      ),
+                    ),
+                  );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -97,7 +119,8 @@ class _HomePageState extends State<HomePage> {
                             setState(() {
                               ToDo temp = ToDo.fromMap(
                                   {'name': myController.text, 'done': false});
-                              todoList.add(temp);
+                              final box = Boxes.getTodolist();
+                              box.add(temp);
                               myController.text = "";
                             });
                           }

@@ -14,10 +14,6 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  void _deleteItem(int index) {
-    widget.todoList.removeAt(index);
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -27,6 +23,7 @@ class _TaskListState extends State<TaskList> {
           onPressed: () {
             setState(() {
               widget.todoList[index].done = !widget.todoList[index].done;
+              widget.todoList[index].save();
             });
           },
           icon: widget.todoList[index].done
@@ -46,9 +43,8 @@ class _TaskListState extends State<TaskList> {
             decorationStyle: TextDecorationStyle.solid,
             decorationThickness: 3,
             decorationColor: const Color.fromRGBO(151, 153, 167, 1),
-            decoration: widget.todoList[index].done
-                ? TextDecoration.lineThrough
-                : null,
+            decoration:
+                widget.todoList[index].done ? TextDecoration.lineThrough : null,
           ),
           overflow: TextOverflow.ellipsis,
         ),
@@ -56,7 +52,7 @@ class _TaskListState extends State<TaskList> {
             ? IconButton(
                 onPressed: () {
                   setState(() {
-                    _deleteItem(index);
+                    widget.todoList[index].delete();
                   });
                 },
                 icon: const Icon(
@@ -85,6 +81,7 @@ class _TaskListState extends State<TaskList> {
                     setState(() {
                       widget.todoList[index].done =
                           !widget.todoList[index].done;
+                      widget.todoList[index].save();
                       Navigator.of(context).pop();
                     });
                   },
@@ -102,7 +99,8 @@ class _TaskListState extends State<TaskList> {
                 TextButton(
                   onPressed: () {
                     setState(() {
-                      widget.todoList.removeAt(index);
+                      widget.todoList[index].delete();
+
                       Navigator.of(context).pop();
                     });
                   },
